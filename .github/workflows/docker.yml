@@ -1,0 +1,18 @@
+name: Integration
+
+on: [push]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish docker image
+    steps:
+    - uses: actions/checkout@v1
+    - name: Authorize docker client
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOCKER_AUTH_TOKEN }}
+      run: docker login docker.pkg.github.com -u danmcclain -p $GITHUB_TOKEN
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag docker.pkg.github.com/danmcclain/theyseemeroling/web:${{github.sha}}
+    - name: Push the Docker image
+      run: docker push docker.pkg.github.com/danmcclain/theyseemeroling/discord:${{github.sha}}
