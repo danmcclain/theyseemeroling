@@ -35,5 +35,5 @@ jobs:
         manifests: |
             deployment.yaml
         images: docker.pkg.github.com/danmcclain/theyseemeroling/discord:${{github.sha}}
-        kubectl-version: '1.15.3'
+        kubectl-version: 'v1.15.3'
     
