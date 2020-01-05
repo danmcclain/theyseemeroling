@@ -22,5 +22,5 @@ jobs:
     - name: Update deployment.yaml
       run: sed -i 's|GITSHA|${{github.sha}}|' $GITHUB_WORKSPACE/deployment.yaml
     - name: Inspect dep 
-      run: echo $GITHUB_WORKSPACE/deployment.yaml
+      run: cat $GITHUB_WORKSPACE/deployment.yaml
     
