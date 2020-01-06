@@ -18,7 +18,7 @@ spec:
       - name: githubcred
       containers:
       - name: discord-bot
-        image: docker.pkg.github.com/danmcclain/theyseemeroling/discord
+        image: docker.pkg.github.com/danmcclain/theyseemeroling/discord:GITSHA
         env:
         - name: DISCORD_TOKEN
           valueFrom:
