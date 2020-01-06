@@ -2,6 +2,7 @@ package lib
 
 import (
 	"log"
+	"strings"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -11,7 +12,7 @@ type Discorder struct {
 }
 
 func NewDiscorder(token string) (*Discorder, error) {
-	session, err := discordgo.New("Bot " + token)
+	session, err := discordgo.New("Bot " + strings.TrimSpace(token))
 
 	if err != nil {
 		return nil, err
