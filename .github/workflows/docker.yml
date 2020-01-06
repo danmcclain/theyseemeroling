@@ -29,6 +29,7 @@ jobs:
       with:
         method: kubeconfig
         kubeconfig: $GITHUB_WORKSPACE/.kubeconfig
+        context: do-nyc1-dmc-kube-1-15
       id: setcontext
     - uses: Azure/k8s-deploy@v1
       with:
