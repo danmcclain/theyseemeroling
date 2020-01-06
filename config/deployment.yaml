@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: theyseemeroling
+  name: theyseemeroling-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: theyseemeroling
+      app: theyseemeroling-api
   template:
     metadata:
       annotations:
         linkerd.io/inject: enabled
       labels:
-        app: theyseemeroling
+        app: theyseemeroling-api
     spec:
       imagePullSecrets:
       - name: githubcred
