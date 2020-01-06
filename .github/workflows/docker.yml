@@ -20,7 +20,7 @@ jobs:
     - name: Push the Docker image
       run: docker push docker.pkg.github.com/danmcclain/theyseemeroling/discord:${{github.sha}}
     - name: Update deployment.yaml
-      run: sed -i 's|GITSHA|${{github.sha}}|' $GITHUB_WORKSPACE/deployment.yaml
+      run: sed -i 's|GITSHA|${{github.sha}}|' $GITHUB_WORKSPACE/config/deployment.yaml
     - name: Save DigitalOcean kubeconfig
       uses: digitalocean/action-doctl@master
       env:
