@@ -7,6 +7,8 @@ on:
     paths-ignore:
     - 'frontend/**'
     - 'config/webapp/**'
+    - '.github/workflows/frontend.yml'
+    - '.github/workflows/central.yml'
 
 jobs:
   publish:

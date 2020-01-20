@@ -7,6 +7,7 @@ on:
     paths:
     - 'frontend/**'
     - 'config/webapp/**'
+    - '.github/workflows/frontend.yml'
 
 jobs:
   publish:

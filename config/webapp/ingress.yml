@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: theyseemerolling-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header l5d-dst-override $service_name.$namespace.svc.cluster.local:$service_port;
+spec:
+  tls:
+    - hosts:
+      - theyseemeroling.danmcclain.net
+      secretName: tsmr-cert
+  rules:
+  - host: theyseemeroling.danmcclain.net
+    http:
+      paths:
+      - backend:
+          serviceName: theyseemeroling-webapp
+          servicePort: 80
