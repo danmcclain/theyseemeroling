@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: theyseemeroling-webapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: theyseemeroling-webapp
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: theyseemeroling-webapp
+    spec:
+      imagePullSecrets:
+      - name: githubcred
+      containers:
+      - name: webapp
+        image: docker.pkg.github.com/danmcclain/theyseemeroling/frontend:GITSHA

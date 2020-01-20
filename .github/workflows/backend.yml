@@ -31,7 +31,7 @@ jobs:
         args: kubernetes cluster kubeconfig show dmc-kube-1-15 > $GITHUB_WORKSPACE/.kubeconfig
 
     - name: Deploy to DigitalOcean Kubernetes
-      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -Rf $GITHUB_WORKSPACE/config/
+      run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -Rf $GITHUB_WORKSPACE/config/api
 
     - name: Verify deployment
       run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status deployment/theyseemeroling-api
