@@ -1,9 +1,11 @@
-name: Integration
+name: Backend Master Deploy
 
 on: 
   push:
     branches:
     - master
+    paths-ignore:
+    - 'frontend/**'
 
 jobs:
   publish:

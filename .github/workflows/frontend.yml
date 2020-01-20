@@ -1,0 +1,50 @@
+name: Frontend Master Deploy
+
+on: 
+  push:
+    branches:
+    - master
+    paths:
+    - 'frontend/**'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish docker image
+    env:
+      working-dir: ./frontend
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - run: yarn install
+      working-directory: ${{env.working-dir}}
+    - run: yarn build
+      name: Build
+      working-directory: ${{env.working-dir}}
+    - name: Authorize docker client
+      env:
+        GITHUB_TOKEN: ${{ secrets.DOCKER_AUTH_TOKEN }}
+      run: docker login docker.pkg.github.com -u danmcclain -p $GITHUB_TOKEN
+      working-directory: ${{env.working-dir}}
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag docker.pkg.github.com/danmcclain/theyseemeroling/discord:${{github.sha}}
+    # - name: Push the Docker image
+    #   run: docker push docker.pkg.github.com/danmcclain/theyseemeroling/discord:${{github.sha}}
+    # - name: Update deployment.yaml
+    #   run: sed -i 's|GITSHA|${{github.sha}}|' $GITHUB_WORKSPACE/config/api/deployment.yaml
+    # - name: Save DigitalOcean kubeconfig
+    #   uses: digitalocean/action-doctl@master
+    #   env:
+    #     DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
+    #   with:
+    #     args: kubernetes cluster kubeconfig show dmc-kube-1-15 > $GITHUB_WORKSPACE/.kubeconfig
+
+    # - name: Deploy to DigitalOcean Kubernetes
+    #   run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig apply -Rf $GITHUB_WORKSPACE/config/
+
+    # - name: Verify deployment
+    #   run: kubectl --kubeconfig=$GITHUB_WORKSPACE/.kubeconfig rollout status deployment/theyseemeroling-api
+    
